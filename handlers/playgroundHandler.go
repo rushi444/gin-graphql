@@ -5,7 +5,9 @@ import (
 	"github.com/99designs/gqlgen/graphql/playground"
 )
 
-func playgroundHandler() gin.HandlerFunc {
+
+// PlaygroundHandler : GraphQL Playground
+func PlaygroundHandler() gin.HandlerFunc {
 	h := playground.Handler("GraphQL", "/graphql")
 
 	return func(c *gin.Context) {

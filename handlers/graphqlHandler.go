@@ -7,13 +7,10 @@ import (
 	"github.com/rushi444/gin-graphql/graph/generated"
 )
 
-// graphqlHandler : GraphQLServer
-func graphqlHandler() gin.HandlerFunc {
-	// NewExecutableSchema and Config are in the generated.go file
-	// Resolver is in the resolver.go file
-	h := handler.NewDefaultServer(generated.NewExecutableSchema(generated.Config{Resolvers: &graph.Resolver{}}))
-
+// GraphQLHandler : GraphQL Server
+func GraphQLHandler() gin.HandlerFunc {
+	srv := handler.NewDefaultServer(generated.NewExecutableSchema(generated.Config{Resolvers: &graph.Resolver{}}))
 	return func(c *gin.Context) {
-		h.ServeHTTP(c.Writer, c.Request)
+		srv.ServeHTTP(c.Writer, c.Request)
 	}
 }
