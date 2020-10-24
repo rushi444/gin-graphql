@@ -2,6 +2,7 @@ package database
 
 import (
 	"fmt"
+	"log"
 
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
@@ -27,14 +28,15 @@ func getDatabaseURL() string {
 }
 
 // GetDatabase : Init DB
-func GetDatabase() (*gorm.DB, error) {
+func GetDatabase() *gorm.DB {
 	db, err := gorm.Open(postgres.Open(getDatabaseURL()), &gorm.Config{})
 	if err != nil {
+		log.Println("Unable to connect to DB", err)
 		postgres, _ := db.DB()
 		postgres.Close()
 	}
 	RunMigrations(db)
-	return db, err
+	return db
 }
 
 // RunMigrations : keeps schema in sync with db

@@ -5,7 +5,6 @@ package graph
 
 import (
 	"context"
-	"log"
 
 	"github.com/google/uuid"
 	"github.com/rushi444/gin-graphql/database"
@@ -14,11 +13,7 @@ import (
 )
 
 func (r *mutationResolver) CreateTodo(ctx context.Context, input model.NewTodo) (*model.Todo, error) {
-	db, err := database.GetDatabase()
-	if err != nil {
-		log.Println("Unable to connect to DB", err)
-		return nil, err
-	}
+	db := database.GetDatabase()
 
 	todo := model.Todo{}
 	user := model.User{}
@@ -37,11 +32,7 @@ func (r *mutationResolver) CreateTodo(ctx context.Context, input model.NewTodo) 
 }
 
 func (r *mutationResolver) CreateUser(ctx context.Context, input *model.NewUser) (*model.User, error) {
-	db, err := database.GetDatabase()
-	if err != nil {
-		log.Println("Unable to connect to DB", err)
-		return nil, err
-	}
+	db := database.GetDatabase()
 
 	user := model.User{}
 
@@ -54,11 +45,7 @@ func (r *mutationResolver) CreateUser(ctx context.Context, input *model.NewUser)
 }
 
 func (r *queryResolver) Todos(ctx context.Context) ([]*model.Todo, error) {
-	db, err := database.GetDatabase()
-	if err != nil {
-		log.Println("Unable to connect to DB", err)
-		return nil, err
-	}
+	db := database.GetDatabase()
 
 	db.Find(&r.todos)
 	for _, todo := range r.todos {
@@ -70,11 +57,8 @@ func (r *queryResolver) Todos(ctx context.Context) ([]*model.Todo, error) {
 }
 
 func (r *queryResolver) Users(ctx context.Context) ([]*model.User, error) {
-	db, err := database.GetDatabase()
-	if err != nil {
-		log.Println("Unable to connect to DB", err)
-		return nil, err
-	}
+	db := database.GetDatabase()
+
 	db.Find(&r.users)
 	return r.users, nil
 }
