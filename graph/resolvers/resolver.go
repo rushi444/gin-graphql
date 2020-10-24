@@ -1,4 +1,4 @@
-package graph
+package resolvers
 
 import (
 	"github.com/rushi444/gin-graphql/graph/model"

@@ -1,4 +1,4 @@
-package graph
+package resolvers
 
 // This file will be automatically regenerated based on the schema, any resolver implementations
 // will be copied through when generating and any unknown code will be moved to the end.
@@ -31,19 +31,6 @@ func (r *mutationResolver) CreateTodo(ctx context.Context, input model.NewTodo) 
 	return &todo, nil
 }
 
-func (r *mutationResolver) CreateUser(ctx context.Context, input *model.NewUser) (*model.User, error) {
-	db := database.GetDatabase()
-
-	user := model.User{}
-
-	user.ID = uuid.New().String()
-	user.Name = input.Name
-
-	db.Create(&user)
-
-	return &user, nil
-}
-
 func (r *queryResolver) Todos(ctx context.Context) ([]*model.Todo, error) {
 	db := database.GetDatabase()
 
@@ -54,13 +41,6 @@ func (r *queryResolver) Todos(ctx context.Context) ([]*model.Todo, error) {
 		todo.User = &user
 	}
 	return r.todos, nil
-}
-
-func (r *queryResolver) Users(ctx context.Context) ([]*model.User, error) {
-	db := database.GetDatabase()
-
-	db.Find(&r.users)
-	return r.users, nil
 }
 
 // Mutation returns generated.MutationResolver implementation.
