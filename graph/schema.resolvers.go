@@ -61,6 +61,11 @@ func (r *queryResolver) Todos(ctx context.Context) ([]*model.Todo, error) {
 	}
 
 	db.Find(&r.todos)
+	for _, todo := range r.todos {
+		user := model.User{}
+		db.Where(&model.User{ID: todo.UserID}).Find(&user)
+		todo.User = &user
+	}
 	return r.todos, nil
 }
 
