@@ -5,7 +5,6 @@ go 1.15
 require (
 	github.com/99designs/gqlgen v0.13.0
 	github.com/gin-gonic/gin v1.6.3
-	github.com/go-pg/pg/v10 v10.5.0
 	github.com/go-playground/validator/v10 v10.4.1 // indirect
 	github.com/golang/protobuf v1.4.3 // indirect
 	github.com/json-iterator/go v1.1.10 // indirect
@@ -18,4 +17,6 @@ require (
 	golang.org/x/sys v0.0.0-20201022201747-fb209a7c41cd // indirect
 	google.golang.org/protobuf v1.25.0 // indirect
 	gopkg.in/yaml.v2 v2.3.0 // indirect
+	gorm.io/driver/postgres v1.0.5
+	gorm.io/gorm v1.20.5
 )
